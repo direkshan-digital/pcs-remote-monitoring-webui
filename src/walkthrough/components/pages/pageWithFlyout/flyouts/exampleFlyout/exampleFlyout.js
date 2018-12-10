@@ -71,7 +71,7 @@ export class ExampleFlyout extends Component {
   }
 
   render() {
-    const { t, onClose } = this.props;
+    const { t, onClose, data } = this.props;
     const {
       itemCount,
       isPending,
@@ -102,6 +102,8 @@ export class ExampleFlyout extends Component {
             <div className="example-flyout-descr">{t('walkthrough.pageWithFlyout.flyouts.example.description')}</div>
 
             <div className="form-placeholder">{t('walkthrough.pageWithFlyout.flyouts.example.insertFormHere')}</div>
+
+            <pre>{JSON.stringify(data, null, 2)}</pre>
 
             {/** Sumarizes the action being taken; including count of items affected & status/pending indicator */}
             <SummarySection>

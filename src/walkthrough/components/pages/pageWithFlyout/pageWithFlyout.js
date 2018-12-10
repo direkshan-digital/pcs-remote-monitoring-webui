@@ -18,11 +18,11 @@ export class PageWithFlyout extends Component {
 
   closeFlyout = () => this.setState(closedFlyoutState);
 
-  openFlyout = (name) => () => this.setState({ openFlyoutName: name });
+  openFlyout = (name, data) => () => this.setState({ openFlyoutName: name, flyoutData: data });
 
   render() {
     const { t } = this.props;
-    const { openFlyoutName } = this.state;
+    const { openFlyoutName, flyoutData } = this.state;
 
     const isExampleFlyoutOpen = openFlyoutName === 'example';
 
@@ -33,7 +33,13 @@ export class PageWithFlyout extends Component {
         </ContextMenu>
         <PageContent className="page-with-flyout-container">
           {t('walkthrough.pageWithFlyout.pageBody')}
-          {isExampleFlyoutOpen && <ExampleFlyoutContainer onClose={this.closeFlyout} />}
+
+          <div>
+            <Btn svg={svgs.reconfigure} onClick={this.openFlyout('example', { name: 'Bob', age: '41' })}>Open Bob</Btn>
+            <Btn svg={svgs.copy} onClick={this.openFlyout('example', { name: 'John', age: '42' })}>Open John</Btn>
+          </div>
+
+          {isExampleFlyoutOpen && <ExampleFlyoutContainer data={flyoutData} onClose={this.closeFlyout} />}
         </PageContent>
       </ComponentArray>
     );
