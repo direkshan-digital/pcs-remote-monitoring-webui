@@ -60,12 +60,6 @@ export class MapPanel extends Component {
       map.addEventListener('click', name, (event) => {
         const [ pin ] = event.features;
         if (this) this.openDeviceDetails(pin.properties.id);
-        // this.popup.setPopupOptions({
-        //   position: pin.geometry.coordinates,
-        //   content: this.buildDevicePopup(pin.properties, classname)
-        // });
-        // this.props.logEvent(toDiagnosticsModel('Map_DeviceClick', {}));
-        // this.popup.open(map);
       });
     });
 
@@ -74,30 +68,6 @@ export class MapPanel extends Component {
     this.map = map;
     this.calculatePins(this.props, true);
   }
-
-  // buildDevicePopup = (properties, classname) => {
-  //   const popupContentBox = document.createElement('div');
-  //   popupContentBox.classList.add('popup-content-box');
-  //   popupContentBox.classList.add(classname);
-
-  //   const type = document.createElement('div');
-  //   type.classList.add('popup-type');
-  //   type.innerText = properties.type;
-
-  //   const name = document.createElement('div');
-  //   name.classList.add('popup-device-name');
-  //   name.innerText = properties.id;
-
-  //   popupContentBox.appendChild(type);
-  //   popupContentBox.appendChild(name);
-
-  //   popupContentBox.onclick = () => {
-  //     // Check this to void any potential attempts to reference the component after unmount
-  //     if (this) this.openDeviceDetails(properties.id);
-  //   };
-
-  //   return popupContentBox;
-  // }
 
   calculatePins(props, mounting = false) {
     if (this.map) {
