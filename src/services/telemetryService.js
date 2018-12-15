@@ -49,7 +49,8 @@ export class TelemetryService {
     if (params.devices && !Array.isArray(params.devices)) {
       params.devices = params.devices.split(",");
     }
-    return HttpClient.post(`${ENDPOINT}alarms`, toTelemetryRequestModel(params))
+    var body = toTelemetryRequestModel(params);
+    return HttpClient.post(`${ENDPOINT}alarms`, body)
         .map(toAlertsModel);
   }
 
@@ -58,7 +59,8 @@ export class TelemetryService {
     if (params.devices && !Array.isArray(params.devices)) {
       params.devices = params.devices.split(",");
     }
-    return HttpClient.post(`${ENDPOINT}alarmsbyrule`, toTelemetryRequestModel(params))
+    var body = toTelemetryRequestModel(params);
+    return HttpClient.post(`${ENDPOINT}alarmsbyrule`, body)
         .map(toActiveAlertsModel);
   }
 
@@ -67,7 +69,8 @@ export class TelemetryService {
     if (params.devices && !Array.isArray(params.devices)) {
       params.devices = params.devices.split(",");
     }
-    return HttpClient.post(`${ENDPOINT}alarmsbyrule/${id}`, toTelemetryRequestModel(params))
+    var body = toTelemetryRequestModel(params);
+    return HttpClient.post(`${ENDPOINT}alarmsbyrule/${id}`, body)
         .map(toAlertsForRuleModel);
   }
 
@@ -84,7 +87,8 @@ export class TelemetryService {
 
   /** Returns a telemetry events */
   static getTelemetryByMessages(params = {}) {
-    return HttpClient.post(`${ENDPOINT}messages`, toTelemetryRequestModel(params))
+    var body = toTelemetryRequestModel(params);
+    return HttpClient.post(`${ENDPOINT}messages`, body)
         .map(toMessagesModel);
   }
 
