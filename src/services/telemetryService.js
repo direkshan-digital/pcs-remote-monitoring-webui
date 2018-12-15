@@ -11,7 +11,8 @@ import {
   toMessagesModel,
   toRuleModel,
   toRulesModel,
-  toStatusModel
+  toStatusModel,
+  toTelemetryRequestModel
 } from './models';
 
 const ENDPOINT = Config.serviceUrls.telemetry;
@@ -48,7 +49,7 @@ export class TelemetryService {
     if (params.devices && !Array.isArray(params.devices)) {
       params.devices = params.devices.split(",");
     }
-    return HttpClient.post(`${ENDPOINT}alarms`, params)
+    return HttpClient.post(`${ENDPOINT}alarms`, toTelemetryRequestModel(params))
         .map(toAlertsModel);
   }
 
@@ -57,7 +58,7 @@ export class TelemetryService {
     if (params.devices && !Array.isArray(params.devices)) {
       params.devices = params.devices.split(",");
     }
-    return HttpClient.post(`${ENDPOINT}alarmsbyrule`, params)
+    return HttpClient.post(`${ENDPOINT}alarmsbyrule`, toTelemetryRequestModel(params))
         .map(toActiveAlertsModel);
   }
 
@@ -66,7 +67,7 @@ export class TelemetryService {
     if (params.devices && !Array.isArray(params.devices)) {
       params.devices = params.devices.split(",");
     }
-    return HttpClient.post(`${ENDPOINT}alarmsbyrule/${id}`, params)
+    return HttpClient.post(`${ENDPOINT}alarmsbyrule/${id}`, toTelemetryRequestModel(params))
         .map(toAlertsForRuleModel);
   }
 
@@ -83,7 +84,7 @@ export class TelemetryService {
 
   /** Returns a telemetry events */
   static getTelemetryByMessages(params = {}) {
-    return HttpClient.post(`${ENDPOINT}messages`, params)
+    return HttpClient.post(`${ENDPOINT}messages`, toTelemetryRequestModel(params))
         .map(toMessagesModel);
   }
 
