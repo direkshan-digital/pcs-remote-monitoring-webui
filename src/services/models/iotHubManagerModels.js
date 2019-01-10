@@ -51,6 +51,16 @@ export const toDeviceModel = (device = {}) => {
   });
 }
 
+export const toModulesModel = (response = {}) => getItems(response)
+  .map(toModuleModel);
+
+export const toModuleModel = (module = {}) => camelCaseReshape(module, {
+  'desired': 'desired',
+  'reported': 'reported',
+  'deviceId': 'deviceId',
+  'moduleId': 'moduleId'
+});
+
 export const toJobsModel = (response = []) => response.map(job => camelCaseReshape(job, {
   'jobId': 'jobId',
   'createdTimeUtc': 'createdTimeUtc',
